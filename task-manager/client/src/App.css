@@ -1,0 +1,36 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+.card {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px,
+    rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+  max-width: 600px;
+  margin: auto;
+  border-radius: 10px !important;
+  border: none !important;
+}
+.card,
+.card-body {
+  border-radius: 10px !important;
+}
+.edit-task p {
+  font-size: 22px;
+}
+.edit-icon {
+  color: #125133;
+  height: 20px;
+  width: 20px;
+}
+.delete-icon {
+  color: #842029;
+  height: 20px;
+  width: 20px;
+}
+.comleted-task {
+  width: 20px;
+}
