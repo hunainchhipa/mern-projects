@@ -38,7 +38,7 @@ const EditTask = () => {
                 <div>
                   <p>Task ID:</p>
                   <p>Name:</p>
-                  <p className={`${taskName?.length >= 30 && "mt-5"}`}>
+                  <p className={`${taskName?.length >= 50 && "mt-5"}`}>
                     Completed:
                   </p>
                 </div>
@@ -57,9 +57,9 @@ const EditTask = () => {
                     />
                   </p>
 
-                  {taskName?.length >= 30 && (
+                  {taskName?.length >= 50 && (
                     <div className="text-danger">
-                      Task name can not be more than 30 characters
+                      Task name can not be more than 50 characters
                     </div>
                   )}
                   <p>

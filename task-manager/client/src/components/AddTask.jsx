@@ -47,9 +47,9 @@ const AddTask = () => {
                 SUBMIT
               </button>
             </div>
-            {taskName?.length >= 30 && (
+            {taskName?.length >= 50 && (
               <div className="text-danger mt-3">
-                Task name can not be more than 30 characters
+                Task name can not be more than 50 characters
               </div>
             )}
           </form>
