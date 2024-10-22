@@ -1,9 +1,18 @@
 require("dotenv").config();
 // async errors
 require("express-async-errors");
+const cors = require("cors");
+
+const path = require("path");
 
 const express = require("express");
 const app = express();
+
+app.use(cors());
+
+// Serve static files from the 'public' directory
+app.use(express.static("./public"));
+// app.use(express.static(path.join(__dirname, "public")));
 
 const connectDB = require("./db/connect");
 const productRouter = require("./routes/products");

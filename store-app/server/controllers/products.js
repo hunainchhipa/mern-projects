@@ -70,7 +70,18 @@ const getAllProducts = async (req, res) => {
   result = result.skip(skip).limit(limit);
 
   const products = await result;
-  res.status(200).json({ products, nbHits: products.length });
+
+  // Map product data to include absolute URLs for images
+  const productsWithImagePaths = products.map((product) => ({
+    ...product._doc, // Spread the product data
+    image: `${req.protocol}://${req.get("host")}${product.image || ""}`, // Construct absolute image URL
+  }));
+
+  console.log("products", products);
+
+  res
+    .status(200)
+    .json({ products: productsWithImagePaths, nbHits: products.length });
 };
 
 module.exports = { getAllProductsStatic, getAllProducts };

@@ -29,6 +29,9 @@ const productSchema = new mongoose.Schema({
     },
     // enum: ["ikea", "liddy", "caressa", "marcos"]
   },
+  image: {
+    type: String,
+  },
 });
 
 module.exports = mongoose.model("Product", productSchema);
