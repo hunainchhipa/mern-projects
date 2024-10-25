@@ -22,7 +22,7 @@
   },
   {
     "name": "armchair",
-    "image": "/images/arm-chair.jpej",
+    "image": "/images/arm-chair.jpeg",
     "price": 125,
     "company": "marcos",
     "rating": 4.8
@@ -101,7 +101,7 @@
   },
   {
     "name": "suede armchair",
-    "image": "/images/arm-chair.png",
+    "image": "/images/arm-chair.jpeg",
     "price": 15,
     "company": "caressa"
   },

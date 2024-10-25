@@ -63,12 +63,18 @@ const getAllProducts = async (req, res) => {
     const fieldList = fields.split(",").join(" ");
     result = result.select(fieldList);
   }
+
   const page = Number(req.query.page) || 1;
   const limit = Number(req.query.limit) || 10;
   const skip = (page - 1) * limit;
 
+  // Apply pagination
   result = result.skip(skip).limit(limit);
 
+  // Get total count of products matching the query (without pagination)
+  const totalProducts = await Product.countDocuments(queryObject);
+
+  // Execute the query to get paginated products
   const products = await result;
 
   // Map product data to include absolute URLs for images
@@ -77,11 +83,14 @@ const getAllProducts = async (req, res) => {
     image: `${req.protocol}://${req.get("host")}${product.image || ""}`, // Construct absolute image URL
   }));
 
-  console.log("products", products);
+  // Calculate total pages
+  const totalPages = Math.ceil(totalProducts / limit);
 
-  res
-    .status(200)
-    .json({ products: productsWithImagePaths, nbHits: products.length });
+  res.status(200).json({
+    products: productsWithImagePaths,
+    nbHits: products.length,
+    totalPages,
+  });
 };
 
 module.exports = { getAllProductsStatic, getAllProducts };
