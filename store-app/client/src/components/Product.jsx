@@ -1,9 +1,9 @@
 import React from "react";
 import { formattedAmount } from "./formattedAmount";
+import { capitalizeWords } from "./capitalizeWords";
 
 const Product = (props) => {
   const data = props?.data;
-  console.log("data", data);
 
   return (
     <>
@@ -19,8 +19,12 @@ const Product = (props) => {
                 />
               </div>
               <div className="flex justify-between mt-2">
-                <p className="product-name">{product?.name}</p>
-                <p className="price">{formattedAmount(product?.price)}</p>
+                <p className="product-name font-mono text-md">
+                  {capitalizeWords(product?.name)}
+                </p>
+                <p className="price text-gray-500">
+                  {formattedAmount(product?.price)}
+                </p>
               </div>
             </div>
           );

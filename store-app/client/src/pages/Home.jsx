@@ -10,13 +10,24 @@ const Home = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [search, setSearch] = useState("");
   const [price, setPrice] = useState("");
+  const [company, setCompany] = useState("");
+  const [priceRange, setPriceRange] = useState(500);
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get(
-          `http://localhost:5000/api/v1/products?page=${currentPage}&name=${search}&sort=${price}`
-        );
+        // const res = await axios.get(
+        //   `http://localhost:5000/api/v1/products?page=${currentPage}&name=${search}&sort=${price}&company=${company}&numericFilters=price<=${priceRange}`
+        // );
+        const res = await axios.get("http://localhost:5000/api/v1/products", {
+          params: {
+            page: currentPage,
+            name: search,
+            sort: price,
+            company: company,
+            numericFilters: `price<=${priceRange}`,
+          },
+        });
         setProductData(res?.data?.products);
         setTotalPages(res?.data?.totalPages);
       } catch (error) {
@@ -25,7 +36,7 @@ const Home = () => {
     };
 
     fetchProducts();
-  }, [currentPage, search, price]);
+  }, [currentPage, search, price, company, priceRange]);
 
   const handlePageChange = (page) => {
     if (page > 0 && page <= totalPages) {
@@ -40,12 +51,16 @@ const Home = () => {
 
   return (
     <>
-      <div className="container mx-auto my-8">
-        <div className="grid grid-cols-12 gap-8">
-          <div className="col-span-2">
-            <Sidebar />
+      <div className="container mx-auto px-3 my-8">
+        <div className="flex flex-col-reverse sm:grid sm:grid-cols-12 gap-5">
+          <div className="sm:col-span-2 col-span-12">
+            <Sidebar
+              setCompany={setCompany}
+              priceRange={priceRange}
+              setPriceRange={setPriceRange}
+            />
           </div>
-          <div className="col-span-10">
+          <div className="sm:col-span-10 col-span-12">
             <div className="flex justify-between">
               <input
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline max-w-sm"
@@ -55,7 +70,7 @@ const Home = () => {
                 onChange={(e) => setSearch(e.target.value)}
                 autoComplete="off"
               />
-              <div className="sort-by flex flex-shrink-0 items-center">
+              <div className="sort-by flex flex-shrink-0 items-center ms-3">
                 <span>Sort By Price </span>
                 <select
                   name="price"

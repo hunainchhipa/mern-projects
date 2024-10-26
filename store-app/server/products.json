@@ -83,7 +83,7 @@
   },
   {
     "name": "shelf",
-    "image": "/images/booksheld.png",
+    "image": "/images/bookshelf.png",
     "price": 30,
     "company": "ikea"
   },
