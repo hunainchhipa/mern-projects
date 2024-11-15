@@ -22,6 +22,7 @@ const upload = multer({ storage: storage });
 
 router.get("/", getAllBooks);
 router.post("/", upload.single("image"), createBook);
-router.route("/:id").delete(deleteBook).patch(editBook);
+router.patch("/:id", upload.single("image"), editBook);
+router.delete("/:id", deleteBook);
 
 module.exports = router;

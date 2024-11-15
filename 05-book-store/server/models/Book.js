@@ -10,7 +10,7 @@ const BookSchema = new mongoose.Schema({
     required: [true, "Please provide author name"],
   },
   price: {
-    type: String,
+    type: Number,
     required: [true, "Please provide price"],
   },
   image: {

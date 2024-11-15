@@ -1,0 +1,6 @@
+.action-icons {
+  visibility: hidden;
+}
+.books-card:hover .action-icons {
+  visibility: visible;
+}
