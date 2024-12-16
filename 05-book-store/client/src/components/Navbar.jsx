@@ -5,7 +5,7 @@ const Navbar = () => {
     <>
       <header className="bg-sky-700 text-white py-5">
         <div className="container mx-auto flex justify-between items-center px-4">
-          <div className="text-2xl">LIBRARY</div>
+          <div className="text-2xl cursor-pointer">LIBRARY</div>
           <nav>
             <ul className="flex space-x-5">
               <li>

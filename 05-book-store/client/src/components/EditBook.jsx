@@ -3,6 +3,8 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { triggerRefresh } from "../redux/refreshSlice";
 import { useForm } from "react-hook-form";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const EditBook = ({ bookData, onClose }) => {
   const {
@@ -40,10 +42,12 @@ const EditBook = ({ bookData, onClose }) => {
       })
       .then((res) => {
         dispatch(triggerRefresh(true));
+        toast.success("Book edited successfully!");
         reset();
         onClose();
       })
       .catch((error) => {
+        toast.error("Failed to edit the book. Please try again.");
         console.log(error);
       });
   };
@@ -110,6 +114,7 @@ const EditBook = ({ bookData, onClose }) => {
           </div>
         </div>
       </form>
+      <ToastContainer />
     </>
   );
 };

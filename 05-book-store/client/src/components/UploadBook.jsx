@@ -3,6 +3,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { triggerRefresh } from "../redux/refreshSlice";
 import { useDispatch } from "react-redux";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const UploadBook = () => {
   const {
@@ -30,9 +32,11 @@ const UploadBook = () => {
       })
       .then((res) => {
         dispatch(triggerRefresh(true));
+        toast.success("Book uploaded successfully!");
         reset();
       })
       .catch((error) => {
+        toast.error("Failed to upload the book. Please try again.");
         console.log(error);
       });
   };
@@ -68,6 +72,11 @@ const UploadBook = () => {
                       placeholder="How to get rich"
                       className="border transition w-full py-2 px-3 rounded-md focus:outline-none focus-visible:ring mt-1"
                     />
+                    {errors.title && (
+                      <p className="text-red-700 text-sm mt-1">
+                        Title is required.
+                      </p>
+                    )}
                   </div>
                   <div className="mt-4">
                     <label htmlFor="author" className="text-gray-600 text-md">
@@ -82,6 +91,11 @@ const UploadBook = () => {
                       placeholder="Donald J. Trump"
                       className="border transition w-full py-2 px-3 rounded-md focus:outline-none focus-visible:ring mt-1"
                     />
+                    {errors.author && (
+                      <p className="text-red-700 text-sm mt-1">
+                        Author is required.
+                      </p>
+                    )}
                   </div>
                   <div className="mt-4">
                     <label htmlFor="price" className="text-gray-600 text-md">
@@ -96,6 +110,11 @@ const UploadBook = () => {
                       placeholder="12"
                       className="border transition w-full py-2 px-3 rounded-md focus:outline-none focus-visible:ring mt-1"
                     />
+                    {errors.price && (
+                      <p className="text-red-700 text-sm mt-1">
+                        Price is required.
+                      </p>
+                    )}
                   </div>
                   <div className="mt-4">
                     <label htmlFor="image" className="text-gray-600 text-md">
@@ -110,6 +129,11 @@ const UploadBook = () => {
                       accept="image/*"
                       className="border transition w-full py-2 px-3 rounded-md focus:outline-none focus-visible:ring mt-1"
                     />
+                    {errors.image && (
+                      <p className="text-red-700 text-sm mt-1">
+                        Image is required.
+                      </p>
+                    )}
                   </div>
                   <div className="mt-5 text-end">
                     <button className="transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300 text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-md px-10 py-2.5 text-center">
@@ -122,6 +146,7 @@ const UploadBook = () => {
           </div>
         </div>
       </section>
+      <ToastContainer />
     </>
   );
 };
